@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import './App.css'
+import './App.scss'
 import PropTypes from 'prop-types'
 import Header from './components/layout/Header'
 import Content from './components/layout/Content'
