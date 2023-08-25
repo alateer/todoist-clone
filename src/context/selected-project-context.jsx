@@ -13,7 +13,6 @@ function SelectedProjectProvider({ children }) {
         </SelectedProjectContext.Provider>
     )
 }
-export default SelectedProjectProvider
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useSelectedProjectValue = () => useContext(SelectedProjectContext)
@@ -22,3 +21,4 @@ SelectedProjectProvider.PropTypes = {
     children: PropTypes.node.isRequired
 }
 
+export default SelectedProjectProvider

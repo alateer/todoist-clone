@@ -1,8 +1,12 @@
 /* eslint-disable react/prop-types */
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import { ProjectOverlay } from './ProjectOverlay'
-import { TaskDate } from './TaskDate'
+import ProjectOverlay from './ProjectOverlay'
+import TaskDate from './TaskDate'
+import { FaRegListAlt, FaRegCalendarAlt } from 'react-icons/fa'
+import { useSelectedProjectValue } from '../context'
+import moment from 'moment'
+import { addTaskApi } from '../api'
 
 function AddTask({
     showAddTaskMain = true,
@@ -12,15 +16,38 @@ function AddTask({
 }) {
     const [showMain, setShowMain] = useState(shouldShowMain)
     const [showProjectOverlay, setShowProjectOverlay] = useState(false)
-    const [project, setProject] = useState('')
+    const [project, setProject] = useState([])
     const [task, setTask] = useState('')
     const [taskDate, setTaskDate] = useState('')
     const [showTaskDate, setShowTaskDate] = useState(false)
 
-    const { selectedProject } = useSele
+    const { selectedProject } = useSelectedProjectValue(<></>)
     
     const addTask = () => {
         const projectId = project || selectedProject
+        let collatedDate = ''
+
+        if (projectId === 'TODAY') {
+            collatedDate = moment().format('DD/MM/YYYY')
+        } else if (projectId === 'NEXT_7') {
+            collatedDate = moment().add(7, 'days').format('DD/MM/YYYY')
+        }
+
+        const response = addTaskApi({
+            projectId,
+            achived: false,
+            date: collatedDate || taskDate,
+            task,
+            userId: 'jlIFXIwyAL3tzHMtzRbw',
+        })
+        if (response.code === 1) {
+            setTask('')
+            setProject('')
+            setShowMain('')
+            setShowProjectOverlay(false)
+        }
+
+        return (task && projectId)
     }
 
 
@@ -77,12 +104,14 @@ function AddTask({
                         </>
                     )}
 
+                    {/* Project Overlay */}
                     <ProjectOverlay
                         setProject={setProject}
                         showProjectOverlay={showProjectOverlay}
                         setShowProjectOverlay={setShowProjectOverlay}
                     />
 
+                    {/* Task Date */}
                     <TaskDate 
                         setTaskDate={setTaskDate}
                         showTaskDate={showTaskDate}
@@ -111,6 +140,56 @@ function AddTask({
                         Add Task
                     </button>
 
+                    {/* Cancel Add Task */}
+                    {!showQuickAddTask && (
+                        <span 
+                            className="add-task__cancel"
+                            data-testid="add-task-main-cancel"
+                            onClick={() => {
+                                setShowMain(false)
+                                setShowProjectOverlay(false)
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    setShowMain(false)
+                                    setShowProjectOverlay(false)
+                                }
+                            }}
+                            aria-label="Cancel adding a task"
+                            tabIndex={0}
+                            role="button"
+                        >
+                            Cancel
+                        </span>
+                    )}
+
+                    {/* Project Overlay */}
+                    <span 
+                        className="add-task__project"
+                        data-testid="show-project-overlay"
+                        onClick={() => setShowProjectOverlay(!showProjectOverlay)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') setShowProjectOverlay(!showProjectOverlay)
+                        }}
+                        tabIndex={0}
+                        role="button"
+                    >
+                        <FaRegListAlt />
+                    </span>
+
+                    {/* Project Overlay */}
+                    <span 
+                        className="add-task__date"
+                        data-testid="show-task-date-overlay"
+                        onClick={() => setShowTaskDate(!showTaskDate)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') setShowTaskDate(!showTaskDate)
+                        }}
+                        tabIndex={0}
+                        role="button"
+                    >
+                        <FaRegCalendarAlt />
+                    </span>
                 </div>
             )}
         </div>

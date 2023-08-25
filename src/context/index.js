@@ -1,12 +1,10 @@
-import {
+import ProjectsProvider, {
     ProjectsContext,
-    ProjectsProvider,
     useProjectsValue,
 } from './projects-context'
 
-import {
+import SelectedProjectProvider, {
     SelectedProjectContext,
-    SelectedProjectProvider,
     useSelectedProjectValue,
 } from './selected-project-context'
 

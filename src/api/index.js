@@ -1,5 +1,11 @@
-import http from './http'
+//import http from './http'
 
 export const getProjectList = () => {
-    return http.get('/api/project/list')
+    return []
+    //return http.get('/api/project/list')
+}
+
+export const addTaskApi = () => {
+    return {}
+    //return http.post('/api/task/add')
 }

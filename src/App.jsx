@@ -2,18 +2,20 @@
 import './App.scss'
 import PropTypes from 'prop-types'
 import Header from './components/layout/Header'
-import Content from './components/layout/Content'
+//import Content from './components/layout/Content'
 import { useState } from 'react'
+import { ProjectsProvider, SelectedProjectProvider } from './context'
 
 function App({ darkModeDefault = false }) {
 
   const [darkMode, setDarkMode] = useState(darkModeDefault)
 
   return (
-    <>
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-      <Content />
-    </>
+    <SelectedProjectProvider>
+      <ProjectsProvider>
+        <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+      </ProjectsProvider>
+    </SelectedProjectProvider>
   )
 }
 

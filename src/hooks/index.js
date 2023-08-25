@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 //import moment from "moment"
 import { getProjectList } from '../api'
 
-export const useProjects = () => {
+function useProjects() {
     const [projects, setProjects] = useState([])
 
     useEffect(() => {
@@ -11,3 +11,5 @@ export const useProjects = () => {
 
     return { projects, setProjects }
 }
+
+export default useProjects
