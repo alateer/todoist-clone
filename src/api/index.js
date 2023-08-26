@@ -1,7 +1,18 @@
 //import http from './http'
 
+const projects = [
+    {
+        "projectId": 1,
+        "name": "A",
+    },
+    {
+        "projectId": 2,
+        "name": "B",
+    }
+]
+
 export const getProjectList = () => {
-    return []
+    return projects
     //return http.get('/api/project/list')
 }
 

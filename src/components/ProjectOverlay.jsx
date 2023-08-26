@@ -15,7 +15,7 @@ function ProjectOverlay({
         showProjectOverlay && (
             <div className="project-overlay" data-testid="project-overlay">
                 <ul className="project-overlay__list">
-                    {projects.map((project) => {
+                    {projects.map((project) => (
                         <li key={project.projectId}>
                             <div
                                 data-testid="project-overlay-action"
@@ -36,7 +36,7 @@ function ProjectOverlay({
                                 {project.name}
                             </div>
                         </li>
-                    })}
+                    ))}
                 </ul>
             </div>
         )

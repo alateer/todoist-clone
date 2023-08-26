@@ -21,7 +21,7 @@ function AddTask({
     const [taskDate, setTaskDate] = useState('')
     const [showTaskDate, setShowTaskDate] = useState(false)
 
-    const { selectedProject } = useSelectedProjectValue(<></>)
+    const { selectedProject } = useSelectedProjectValue()
     
     const addTask = () => {
         const projectId = project || selectedProject
@@ -52,7 +52,10 @@ function AddTask({
 
 
     return (
-        <div className="add-task" data-testid="add-task-comp">
+        <div 
+            className={showQuickAddTask ? 'add-task add-task__overlay' : 'add-task'}
+            data-testid="add-task-comp"
+        >
             {/* Task Main Tab */}
             {showAddTaskMain && (
                 <div 
@@ -177,7 +180,7 @@ function AddTask({
                         <FaRegListAlt />
                     </span>
 
-                    {/* Project Overlay */}
+                    {/* Project Date */}
                     <span 
                         className="add-task__date"
                         data-testid="show-task-date-overlay"
