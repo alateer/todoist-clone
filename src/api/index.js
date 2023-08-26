@@ -63,6 +63,10 @@ export const addTaskApi = () => {
     //return http.post('/api/task/add')
 }
 
+export const addProjectApi = () => {
+    return {}
+}
+
 export const archivedTask = () => {
     return true
 }
