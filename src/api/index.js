@@ -2,12 +2,29 @@
 
 const projects = [
     {
-        "projectId": 1,
+        "projectId": "Time",
+        "docId": 1,
         "name": "A",
     },
     {
-        "projectId": 2,
+        "projectId": "Socket",
+        "docId": 2,
         "name": "B",
+    },
+    {
+        "projectId": "Box",
+        "docId": 3,
+        "name": "C",
+    },
+    {
+        "projectId": "Category",
+        "docId": 4,
+        "name": "D",
+    },
+    {
+        "projectId": "Tag",
+        "docId": 5,
+        "name": "E",
     }
 ]
 
@@ -49,11 +66,6 @@ const tasks = [
     }
 ]
 
-export const getProjectList = () => {
-    return projects
-    //return http.get('/api/project/list')
-}
-
 export const getTaskList = () => {
     return tasks
 }
@@ -63,7 +75,16 @@ export const addTaskApi = () => {
     //return http.post('/api/task/add')
 }
 
+export const getProjectList = () => {
+    return projects
+    //return http.get('/api/project/list')
+}
+
 export const addProjectApi = () => {
+    return {}
+}
+
+export const deleteProjectApi = () => {
     return {}
 }
 
