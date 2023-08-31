@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
-import PropTypes from 'prop-types'
-import { FaPizzaSlice, FaTasks } from 'react-icons/fa'
+import { FaTasks } from 'react-icons/fa'
 import AddTask from '../AddTask'
 
-function Header({ darkMode, setDarkMode }) {
+function Header() {
 
 	const [shouldShowMain, setShouldShowMain] = useState(false)
 	const [showQuickAddTask, setShowQuickAddTask] = useState(false)
@@ -32,16 +31,6 @@ function Header({ darkMode, setDarkMode }) {
 							</button>
 						
 						</li>
-						<li className="settings__darkmode">
-							<button
-								data-testid="dark-mode-action"
-								aria-label="Darkmode on/off"
-								type="button"
-								onClick={() => setDarkMode(!darkMode)}
-							>
-								<FaPizzaSlice />
-							</button>
-						</li>
 					</ul>
 				</div>
 			</nav>
@@ -55,11 +44,6 @@ function Header({ darkMode, setDarkMode }) {
 
 		</header>
 	)
-}
-
-Header.PropTypes = {
-	darkMode: PropTypes.bool.isRequired,
-	setDarkMode: PropTypes.func.isRequired
 }
 
 export default Header

@@ -10,8 +10,8 @@ function IndividualProject({ project }) {
     const{ projects, setProjects } = useProjectsValue()
     const { setSelectedProject } = useSelectedProjectValue()
 
-    const deleteProject = () => {
-        deleteProjectApi()
+    const deleteProject = async (id) => {
+        deleteProjectApi(id)
         setProjects(projects)
         setSelectedProject('INBOX')
     }
@@ -38,7 +38,7 @@ function IndividualProject({ project }) {
                             <p>Are you sure you want to delete this project?</p>
                             <button
                                 type="button"
-                                onClick={() => deleteProject(project.docId)}
+                                onClick={() => deleteProject(project.id)}
                             >
                                 Delete
                             </button>

@@ -206,24 +206,6 @@ header {
                             cursor: pointer;
                         }
                     }
-    
-                    &.settings__darkmode {
-                        button {
-                            @include transparent-button();
-                            background-color: transparent;
-                            border: 0;
-                            color: white;
-                            cursor: pointer;
-                            display: -webkit-box;
-                            display: -ms-flexbox;
-                            display: flex;
-    
-                            svg {
-                                width: 20px;
-                                height: 20px;
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -473,18 +455,6 @@ header {
                 border-radius: 16px;
             }
         }
-    }
-}
-
-/* Darkmode
-    =========================================== */
-
-.darkmode {
-    header {
-        -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-        background-color: #282828;
-        border-color: transparent;
     }
 }
 

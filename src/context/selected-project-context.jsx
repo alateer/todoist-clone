@@ -17,7 +17,7 @@ function SelectedProjectProvider({ children }) {
 // eslint-disable-next-line react-refresh/only-export-components
 export const useSelectedProjectValue = () => useContext(SelectedProjectContext)
 
-SelectedProjectProvider.PropTypes = {
+SelectedProjectProvider.propTypes = {
     children: PropTypes.node.isRequired
 }
 

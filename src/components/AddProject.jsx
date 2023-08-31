@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { generatePushId } from "../helpers"
 import { useProjectsValue } from "../context"
 import { addProjectApi } from "../api"
 import PropTypes from 'prop-types'
+import * as _ from 'lodash'
 
 
 
@@ -10,16 +10,13 @@ function AddProject({ shouldShow = false }) {
 
     const [show, setShow] = useState(shouldShow)
     const [projectName, setProjectName] = useState('')
-
-    const projectId = generatePushId()
     const { projects, setProjects } = useProjectsValue()
 
-    function addProject() {
+    const addProject = async () => {
         if (projectName) {
-            console.log(projectId)
-            addProjectApi()
+            addProjectApi(_.toUpper(projectName), projectName)
             setProjects([...projects])
-            setProjectName('')
+            setProjectName(projectName)
             setShow(false)
         }
     }

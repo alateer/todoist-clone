@@ -2,10 +2,36 @@ import { useState, useEffect } from "react"
 import moment from "moment"
 import { getProjectList, getTaskList } from '../api'
 import { collatedTasksExist } from '../helpers'
+import * as _ from 'lodash'
 
 export const useTasks = selectedProject => {
-    const [tasks, setTasks] = useState([])
+    let [tasks, setTasks] = useState([])
     const [archivedTasks, setArchivedTasks] = useState([])
+
+    const getTaskList = async (projectKey) => {
+        try {
+            let { code, data } = await getTaskList(projectKey)
+            if (+code != 200) tasks = []
+
+            data = _.map(data || [], (x) => {
+                return {
+                    id: x.taskId,
+                    projectKey: x.projectKey,
+                    task: x.task,
+                    date: x.date,
+                    archived: x.status,
+                }
+            })
+
+            if (!collatedTasksExist(selectedProject)) {
+                tasks = _.filter(data, (x) => x.projectKey === selectedProject)
+            } else if (selectedProject === 'TODAY') {
+                
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         let tasks = getTaskList()
@@ -29,11 +55,30 @@ export const useTasks = selectedProject => {
 }
 
 function useProjects() {
-    const [projects, setProjects] = useState([])
+    let [projects, setProjects] = useState([])
+    console.log(projects)
+
+    const queryProjects = async () => {
+        try {
+            let { code, data } = await getProjectList()
+            if (+code !== 200) projects = []
+            data = _.map(data || [], (x) => {
+                return {
+                    id: x.projectId,
+                    key: x.projectKey,
+                    name: x.projectName,
+                }
+            })
+            setProjects(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
-        setProjects(getProjectList())
-    }, [projects])
+        queryProjects()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return { projects, setProjects }
 }
