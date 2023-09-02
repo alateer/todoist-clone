@@ -4,16 +4,16 @@ import { archivedTask } from '../api'
 
 function Checkbox({ id, taskDesc }) {
 
-    console.log('checkbox id: ', id, 'teskDesc: ', taskDesc)
-    const archiveTask = archivedTask()
+    const archiveTask = async (taskId) => 
+        archivedTask(taskId)
 
     return (
         <div 
             className="checkbox-holder"
             data-testid="checkbox-action"
-            onClick={() => archiveTask()}
+            onClick={() => archiveTask(id)}
             onKeyDown={(e) => {
-                if (e.key === 'Enter') archiveTask()
+                if (e.key === 'Enter') archiveTask(id)
             }}
             aria-label={`Mark ${taskDesc}`}
             role="button"

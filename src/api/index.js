@@ -22,6 +22,7 @@ export const deleteProjectApi = (id) => {
 }
 
 export const getTaskList = (projectKey) => {
+    console.log('getTaskList, projectKey: ', projectKey)
     return http.get('/task/taskList', {
         params: {
             'projectKey': projectKey
@@ -29,11 +30,19 @@ export const getTaskList = (projectKey) => {
     })
 }
 
-export const archivedTask = () => {
-    return true
+export const archivedTask = (id) => {
+    const result = http.get('/task/updateStatus', {
+        params: {
+            'taskId': id,
+            'status': 2
+        }
+    })
+
+    console.log(`archivedTask: id: ${id} result: ${result}`)
 }
 
-export const addTaskApi = () => {
-    return {}
-    //return http.post('/api/task/add')
+export const addTaskApi = (task) => {
+    const result = http.post('/task/addTask', task)
+
+    console.log(`archivedTask: task: ${task} result: ${result}`)
 }

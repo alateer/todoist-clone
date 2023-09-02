@@ -14,40 +14,38 @@ function AddTask({
     showQuickAddTask,
     setShowQuickAddTask,
 }) {
-    const [showMain, setShowMain] = useState(shouldShowMain)
-    const [showProjectOverlay, setShowProjectOverlay] = useState(false)
-    const [project, setProject] = useState([])
+
     const [task, setTask] = useState('')
     const [taskDate, setTaskDate] = useState('')
+    const [project, setProject] = useState('')
+    const [showMain, setShowMain] = useState(shouldShowMain)
+    const [showProjectOverlay, setShowProjectOverlay] = useState(false)
     const [showTaskDate, setShowTaskDate] = useState(false)
 
     const { selectedProject } = useSelectedProjectValue()
     
-    const addTask = () => {
-        const projectId = project || selectedProject
+    const addTask = async () => {
+        const projectKey = project || selectedProject
         let collatedDate = ''
 
-        if (projectId === 'TODAY') {
-            collatedDate = moment().format('DD/MM/YYYY')
-        } else if (projectId === 'NEXT_7') {
-            collatedDate = moment().add(7, 'days').format('DD/MM/YYYY')
+        if (projectKey === 'TODAY') {
+            collatedDate = moment().format('YYYY-MM-DD hh:mm:ss')
+        } else if (projectKey === 'NEXT_7') {
+            collatedDate = moment().add(7, 'days').format('YYYY-MM-DD hh:mm:ss')
         }
 
-        const response = addTaskApi({
-            projectId,
-            achived: false,
-            date: collatedDate || taskDate,
+        addTaskApi({
+            projectKey,
+            addDate: collatedDate || taskDate,
             task,
-            userId: 'jlIFXIwyAL3tzHMtzRbw',
         })
-        if (response.code === 1) {
-            setTask('')
-            setProject('')
-            setShowMain('')
-            setShowProjectOverlay(false)
-        }
 
-        return (task && projectId)
+        setTask('')
+        setProject('')
+        setShowMain('')
+        setShowProjectOverlay(false)
+
+        return true
     }
 
 

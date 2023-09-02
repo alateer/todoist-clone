@@ -20,7 +20,7 @@ function Tasks() {
     }
 
     if (projects && projects.length > 0 && selectedProject && !collatedTasksExist(selectedProject)) {
-        projectName = getTitle(projects, selectedProject).name
+        projectName = getTitle(projects, selectedProject)?.name
     }
 
     useEffect(() => {
@@ -33,8 +33,8 @@ function Tasks() {
 
             <ul className="tasks__list">
                 {tasks.map((task) => (
-                    <li key={`${task.taskId}`}>
-                        <Checkbox id={task.taskId} taskDesc={task.task}/>
+                    <li key={`${task.id}`}>
+                        <Checkbox id={task.id} taskDesc={task.task}/>
                         <span>{task.task}</span>
                     </li>
                 ))}
